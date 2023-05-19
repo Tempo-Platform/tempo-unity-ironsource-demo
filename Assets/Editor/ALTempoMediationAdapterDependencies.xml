@@ -1,0 +1,9 @@
+<dependencies>
+	<androidPackages>
+		<androidPackage spec="com.github.Tempo-Platform:tempo-android-applovin-mediation:1.0.2">
+			<repositories>
+				<repository>https://jitpack.io</repository>
+			</repositories>
+		</androidPackage>
+	</androidPackages>
+</dependencies>
