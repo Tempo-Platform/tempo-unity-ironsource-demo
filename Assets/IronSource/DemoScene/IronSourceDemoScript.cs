@@ -11,9 +11,9 @@ public class IronSourceDemoScript : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string appKey = "1a0348c9d";
+        string appKey = "1a46bef35";
 #elif UNITY_IPHONE
-        string appKey = "1a03213c5";
+        string appKey = "1a470a75d";
 #else
         string appKey = "unexpected_platform";
 #endif
@@ -28,6 +28,8 @@ public class IronSourceDemoScript : MonoBehaviour
         // SDK init
         Debug.Log("unity-script: IronSource.Agent.init");
         IronSource.Agent.init(appKey);
+
+        SetupButtons();
 
     }
 
@@ -126,85 +128,135 @@ public class IronSourceDemoScript : MonoBehaviour
 
     }
 
+
+    private void SetupButtons()
+    {
+        TempoCanvas.Instance.RewardedLoad.onClick.AddListener(() =>
+        {
+            Debug.Log("unity-script: LoadRewardedButtonClicked");
+            IronSource.Agent.loadRewardedVideo();
+        });
+
+        TempoCanvas.Instance.RewardedPlay.onClick.AddListener(() =>
+        {
+            if (IronSource.Agent.isRewardedVideoAvailable())
+            {
+                Debug.Log("unity-script: ShowRewardedButtonClicked");
+                IronSource.Agent.showRewardedVideo();
+            }
+            else
+            {
+                Debug.Log("unity-script: IronSource.Agent.isInterstitialVideoAvailable - False");
+            }
+        });
+
+
+        TempoCanvas.Instance.InterstitialLoad.onClick.AddListener(() =>
+        {
+            Debug.Log("unity-script: LoadRewardedButtonClicked");
+            IronSource.Agent.loadInterstitial();
+        });
+
+        TempoCanvas.Instance.InterstitialPlay.onClick.AddListener(() =>
+        {
+            if (IronSource.Agent.isInterstitialReady())
+            {
+                Debug.Log("unity-script: ShowInterstitialButtonClicked");
+                IronSource.Agent.showInterstitial();
+            }
+            else
+            {
+                Debug.Log("unity-script: IronSource.Agent.isRewardedVideoAvailable - False");
+            }
+        });
+    }
+
+
+
+
+
     void OnApplicationPause(bool isPaused)
     {
         Debug.Log("unity-script: OnApplicationPause = " + isPaused);
         IronSource.Agent.onApplicationPause(isPaused);
     }
 
+
+
+
     public void OnGUI()
     {
 
-        GUI.backgroundColor = Color.blue;
-        GUI.skin.button.fontSize = (int)(0.035f * Screen.width);
+        //GUI.backgroundColor = Color.blue;
+        //GUI.skin.button.fontSize = (int)(0.035f * Screen.width);
 
 
 
 
 
-        Rect showRewardedVideoButton = new Rect(0.10f * Screen.width, 0.15f * Screen.height, 0.80f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(showRewardedVideoButton, "Show Rewarded Video"))
-        {
-            Debug.Log("unity-script: ShowRewardedVideoButtonClicked");
-            if (IronSource.Agent.isRewardedVideoAvailable())
-            {
-                IronSource.Agent.showRewardedVideo();
-            }
-            else
-            {
-                Debug.Log("unity-script: IronSource.Agent.isRewardedVideoAvailable - False");
-            }
-        }
+        //Rect showRewardedVideoButton = new Rect(0.10f * Screen.width, 0.15f * Screen.height, 0.80f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(showRewardedVideoButton, "Show Rewarded Video"))
+        //{
+        //    Debug.Log("unity-script: ShowRewardedVideoButtonClicked");
+        //    if (IronSource.Agent.isRewardedVideoAvailable())
+        //    {
+        //        IronSource.Agent.showRewardedVideo();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("unity-script: IronSource.Agent.isRewardedVideoAvailable - False");
+        //    }
+        //}
        
         
 
-        Rect showOfferwallButton = new Rect(0.10f * Screen.width, 0.25f * Screen.height, 0.80f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(showOfferwallButton, "Show Offerwall"))
-        {
-            if (IronSource.Agent.isOfferwallAvailable())
-            {
-                IronSource.Agent.showOfferwall();
-            }
-            else
-            {
-                Debug.Log("IronSource.Agent.isOfferwallAvailable - False");
-            }
-        }
+        //Rect showOfferwallButton = new Rect(0.10f * Screen.width, 0.25f * Screen.height, 0.80f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(showOfferwallButton, "Show Offerwall"))
+        //{
+        //    if (IronSource.Agent.isOfferwallAvailable())
+        //    {
+        //        IronSource.Agent.showOfferwall();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("IronSource.Agent.isOfferwallAvailable - False");
+        //    }
+        //}
 
-        Rect loadInterstitialButton = new Rect(0.10f * Screen.width, 0.35f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(loadInterstitialButton, "Load Interstitial"))
-        {
-            Debug.Log("unity-script: LoadInterstitialButtonClicked");
-            IronSource.Agent.loadInterstitial();
-        }
+        //Rect loadInterstitialButton = new Rect(0.10f * Screen.width, 0.35f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(loadInterstitialButton, "Load Interstitial"))
+        //{
+        //    Debug.Log("unity-script: LoadInterstitialButtonClicked");
+        //    IronSource.Agent.loadInterstitial();
+        //}
 
-        Rect showInterstitialButton = new Rect(0.55f * Screen.width, 0.35f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(showInterstitialButton, "Show Interstitial"))
-        {
-            Debug.Log("unity-script: ShowInterstitialButtonClicked");
-            if (IronSource.Agent.isInterstitialReady())
-            {
-                IronSource.Agent.showInterstitial();
-            }
-            else
-            {
-                Debug.Log("unity-script: IronSource.Agent.isInterstitialReady - False");
-            }
-        }
+        //Rect showInterstitialButton = new Rect(0.55f * Screen.width, 0.35f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(showInterstitialButton, "Show Interstitial"))
+        //{
+        //    Debug.Log("unity-script: ShowInterstitialButtonClicked");
+        //    if (IronSource.Agent.isInterstitialReady())
+        //    {
+        //        IronSource.Agent.showInterstitial();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("unity-script: IronSource.Agent.isInterstitialReady - False");
+        //    }
+        //}
 
-        Rect loadBannerButton = new Rect(0.10f * Screen.width, 0.45f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(loadBannerButton, "Load Banner"))
-        {
-            Debug.Log("unity-script: loadBannerButtonClicked");
-            IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
-        }
+        //Rect loadBannerButton = new Rect(0.10f * Screen.width, 0.45f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(loadBannerButton, "Load Banner"))
+        //{
+        //    Debug.Log("unity-script: loadBannerButtonClicked");
+        //    IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
+        //}
 
-        Rect destroyBannerButton = new Rect(0.55f * Screen.width, 0.45f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
-        if (GUI.Button(destroyBannerButton, "Destroy Banner"))
-        {
-            Debug.Log("unity-script: loadBannerButtonClicked");
-            IronSource.Agent.destroyBanner();
-        }
+        //Rect destroyBannerButton = new Rect(0.55f * Screen.width, 0.45f * Screen.height, 0.35f * Screen.width, 0.08f * Screen.height);
+        //if (GUI.Button(destroyBannerButton, "Destroy Banner"))
+        //{
+        //    Debug.Log("unity-script: loadBannerButtonClicked");
+        //    IronSource.Agent.destroyBanner();
+        //}
 
 
 
@@ -257,6 +309,10 @@ public class IronSourceDemoScript : MonoBehaviour
 
     void RewardedVideoAvailabilityChangedEvent(bool canShowAd)
     {
+        if(canShowAd)
+        {
+            TempoCanvas.Instance.OnRewardedReady();
+        }
         Debug.Log("unity-script: I got RewardedVideoAvailabilityChangedEvent, value = " + canShowAd);
     }
 
@@ -375,6 +431,7 @@ public class IronSourceDemoScript : MonoBehaviour
 
     void InterstitialAdReadyEvent()
     {
+        TempoCanvas.Instance.OnInterstitialReady();
         Debug.Log("unity-script: I got InterstitialAdReadyEvent");
     }
 
@@ -444,6 +501,28 @@ public class IronSourceDemoScript : MonoBehaviour
 
 
     #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #region Banner AdInfo
 
