@@ -1,6 +1,6 @@
 <dependencies>
   <packages>
-    <package>com.github.Tempo-Platform:tempo-android-applovin-mediation:1.0.2</package>
+    <package>com.github.Tempo-Platform:tempo-android-ironsource-mediation:0.1.1</package>
     <package>com.google.android.gms:play-services-ads-identifier:18.0.1</package>
     <package>com.google.android.gms:play-services-basement:18.1.0</package>
     <package>com.ironsource.sdk:mediationsdk:7.3.0.1</package>
@@ -71,14 +71,13 @@
     <file>Assets/Plugins/Android/androidx.viewpager.viewpager-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.viewpager2.viewpager2-1.0.0.aar</file>
     <file>Assets/Plugins/Android/com.android.volley.volley-1.2.1.aar</file>
-    <file>Assets/Plugins/Android/com.applovin.applovin-sdk-11.5.5.aar</file>
     <file>Assets/Plugins/Android/com.github.stephenc.jcip.jcip-annotations-1.0-1.jar</file>
     <file>Assets/Plugins/Android/com.github.stripe.stripe-android.payments-core-v17.2.0.aar</file>
-    <file>Assets/Plugins/Android/com.github.Tempo-Platform.tempo-android-applovin-mediation-1.0.2.aar</file>
-    <file>Assets/Plugins/Android/com.github.Tempo-Platform.tempo-android-sdk-release-1.0.1.aar</file>
+    <file>Assets/Plugins/Android/com.github.Tempo-Platform.tempo-android-ironsource-mediation-0.1.1.aar</file>
+    <file>Assets/Plugins/Android/com.github.Tempo-Platform.tempo-android-sdk-release-1.0.2.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-identifier-18.0.1.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-base-17.5.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.1.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.2.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-identity-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-maps-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-17.2.0.aar</file>
