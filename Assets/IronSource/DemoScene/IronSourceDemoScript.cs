@@ -37,58 +37,27 @@ public class IronSourceDemoScript : MonoBehaviour
         // Rewarded
 
         IronSourceRewardedVideoEvents.onAdAvailableEvent += onAdAvailableEventRew;
-        //IronSourceRewardedVideoEvents.onAdAvailableEvent += RewardedVideoOnAdAvailable;
-
         IronSourceRewardedVideoEvents.onAdClickedEvent += onAdClickedEventRew;
-        //IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
-
         IronSourceRewardedVideoEvents.onAdClosedEvent += onAdClosedEventRew;
-        //IronSourceRewardedVideoEvents.onAdClosedEvent += RewardedVideoOnAdClosedEvent;
-
         IronSourceRewardedVideoEvents.onAdLoadFailedEvent += onAdLoadFailedEventRew;
-
         IronSourceRewardedVideoEvents.onAdOpenedEvent += onAdOpenedEventRew;
-       // IronSourceRewardedVideoEvents.onAdOpenedEvent += RewardedVideoOnAdOpenedEvent;
-
         IronSourceRewardedVideoEvents.onAdReadyEvent += onAdReadyEventRew;
-
         IronSourceRewardedVideoEvents.onAdRewardedEvent += onAdRewardedEventRew;
-        //IronSourceRewardedVideoEvents.onAdRewardedEvent += RewardedVideoOnAdRewardedEvent;
-
         IronSourceRewardedVideoEvents.onAdShowFailedEvent += onAdShowFailedEventRew;
-       // IronSourceRewardedVideoEvents.onAdShowFailedEvent += RewardedVideoOnAdShowFailedEvent;
-
         IronSourceRewardedVideoEvents.onAdUnavailableEvent += onAdUnavailableEventRew;
-        //IronSourceRewardedVideoEvents.onAdUnavailableEvent += RewardedVideoOnAdUnavailable;
 
         // Interstitial
         IronSourceInterstitialEvents.onAdClickedEvent += onAdClickedEventInt;
-     //   IronSourceInterstitialEvents.onAdClickedEvent += InterstitialOnAdClickedEvent;
-
         IronSourceInterstitialEvents.onAdClosedEvent += onAdClickedEventInt;
-      //  IronSourceInterstitialEvents.onAdClosedEvent += InterstitialOnAdClosedEvent;
-
         IronSourceInterstitialEvents.onAdLoadFailedEvent += onAdLoadFailedEventInt;
-       // IronSourceInterstitialEvents.onAdLoadFailedEvent += InterstitialOnAdLoadFailed;
-
         IronSourceInterstitialEvents.onAdOpenedEvent += onAdReadyEventInt;
-       // IronSourceInterstitialEvents.onAdOpenedEvent += InterstitialOnAdOpenedEvent;
-
         IronSourceInterstitialEvents.onAdReadyEvent += onAdReadyEventInt;
-       // IronSourceInterstitialEvents.onAdReadyEvent += InterstitialOnAdReadyEvent;
-
         IronSourceInterstitialEvents.onAdShowFailedEvent += onAdShowFailedEventInt;
-      //  IronSourceInterstitialEvents.onAdShowFailedEvent += InterstitialOnAdShowFailedEvent;
-
         IronSourceInterstitialEvents.onAdShowSucceededEvent += onAdShowSucceededEventInt;
-     //   IronSourceInterstitialEvents.onAdShowSucceededEvent += InterstitialOnAdShowSucceededEvent;
-
 
         // Other
         IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitializationCompletedEvent;
         IronSourceEvents.onImpressionDataReadyEvent += ImpressionDataReadyEvent;
-
-
     }
 
     private void SetupButtons()
