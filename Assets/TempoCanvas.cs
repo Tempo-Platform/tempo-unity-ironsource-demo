@@ -19,40 +19,38 @@ public class TempoCanvas : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        InterstitialLoad.onClick.AddListener(LoadInterstitialAd);
-        InterstitialPlay.onClick.AddListener(ShowInterstitialAd);
-        RewardedLoad.onClick.AddListener(LoadRewardedAd);
-        RewardedPlay.onClick.AddListener(ShowRewardedlAd);
+        InterstitialLoad.onClick.AddListener(LoadInterstitialAdDisplay);
+        RewardedLoad.onClick.AddListener(LoadRewardedAdDisplay);
     }
 
-    private void LoadInterstitialAd()
+    private void LoadInterstitialAdDisplay()
     {
         InterstitialMsg.text = "Loading...";
-    }
-    private void ShowInterstitialAd()
-    {
-        InterstitialMsg.text = "";
-        InterstitialPlay.interactable = false;
     }
     public void EnableInterstitialAd()
     {
         InterstitialMsg.text = "";
         InterstitialPlay.interactable = true;
     }
+    public void CloseInterstitialAd()
+    {
+        InterstitialMsg.text = "";
+        InterstitialPlay.interactable = false;
+    }
 
 
-    private void LoadRewardedAd()
+    private void LoadRewardedAdDisplay()
     {
         RewardedMsg.text = "Loading...";
-    }
-    private void ShowRewardedlAd()
-    {
-        RewardedMsg.text = "";
-        RewardedPlay.interactable = false;
     }
     public void EnableRewardedAd()
     {
         RewardedMsg.text = "";
         RewardedPlay.interactable = true;
+    }
+    public void CloseRewardedAd()
+    {
+        RewardedMsg.text = "";
+        RewardedPlay.interactable = false;
     }
 }

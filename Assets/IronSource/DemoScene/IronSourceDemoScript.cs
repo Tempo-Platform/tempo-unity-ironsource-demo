@@ -35,7 +35,6 @@ public class IronSourceDemoScript : MonoBehaviour
     void OnEnable()
     {
         // Rewarded
-
         IronSourceRewardedVideoEvents.onAdAvailableEvent += onAdAvailableEventRew;
         IronSourceRewardedVideoEvents.onAdClickedEvent += onAdClickedEventRew;
         IronSourceRewardedVideoEvents.onAdClosedEvent += onAdClosedEventRew;
@@ -48,7 +47,7 @@ public class IronSourceDemoScript : MonoBehaviour
 
         // Interstitial
         IronSourceInterstitialEvents.onAdClickedEvent += onAdClickedEventInt;
-        IronSourceInterstitialEvents.onAdClosedEvent += onAdClickedEventInt;
+        IronSourceInterstitialEvents.onAdClosedEvent += onAdClosedEventInt;
         IronSourceInterstitialEvents.onAdLoadFailedEvent += onAdLoadFailedEventInt;
         IronSourceInterstitialEvents.onAdOpenedEvent += onAdReadyEventInt;
         IronSourceInterstitialEvents.onAdReadyEvent += onAdReadyEventInt;
@@ -59,6 +58,7 @@ public class IronSourceDemoScript : MonoBehaviour
         IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitializationCompletedEvent;
         IronSourceEvents.onImpressionDataReadyEvent += ImpressionDataReadyEvent;
     }
+
 
     private void SetupButtons()
     {
@@ -137,6 +137,11 @@ public class IronSourceDemoScript : MonoBehaviour
     {
         Oi("onAdClosedEventInt");
     }
+    private void onAdClosedEventInt(IronSourceAdInfo obj)
+    {
+        TempoCanvas.Instance.CloseInterstitialAd();
+        Oi("onAdClosedEventInt");
+    }
 
     // REWARDED 
     private void onAdUnavailableEventRew()
@@ -161,6 +166,7 @@ public class IronSourceDemoScript : MonoBehaviour
     }
     private void onAdClosedEventRew(IronSourceAdInfo obj)
     {
+        TempoCanvas.Instance.CloseRewardedAd();
         Oi("onAdClosedEventRew");
     }
     private void onAdClickedEventRew(IronSourcePlacement arg1, IronSourceAdInfo arg2)
