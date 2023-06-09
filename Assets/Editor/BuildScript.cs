@@ -7,7 +7,6 @@ using UnityEditor;
 
 public class BuildScript : MonoBehaviour
 {
-
 	static private string[] collectBuildScenes()
     {
         var scenes = new List<string>();

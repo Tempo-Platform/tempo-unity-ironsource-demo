@@ -4,29 +4,27 @@ using System.Collections.Generic;
 using System;
 
 
-// Example for IronSource Unity.
-public class IronSourceDemoScript : MonoBehaviour
+public class IronSourceController : MonoBehaviour
 {
+    [Header("APP KEY from ironSource account")]
     [SerializeField] private string _androidAppKey = "1a46bef35"; // "1a46bef35"
     [SerializeField] private string _iosAppKey = "1a4922385"; // "1a4922385"
 
+    [Header("Project settings")]
+    [SerializeField] private TempoCanvas _tempoCanvas;
+    [SerializeField] private bool _isDebugging;
+
     public void Start()
     {
-
-        Debug.Log("unity-script: IronSource.Agent.validateIntegration");
-        IronSource.Agent.validateIntegration();
-
+        // Setup for manual control of reward ads
         IronSource.Agent.setManualLoadRewardedVideo(true);
 
-        Debug.Log("unity-script: unity version" + IronSource.unityVersion());
-
-        // SDK init
-        Debug.Log("unity-script: IronSource.Agent.init");
+        // Initialise the ironSource SDK
         IronSource.Agent.init(GetAppKey());
 
-        SetupButtons();
+        // Configures behaviour of UI elements in demo scene
+        SetupUI();
     }
-
    
     void OnEnable()
     {
@@ -45,63 +43,57 @@ public class IronSourceDemoScript : MonoBehaviour
         IronSourceInterstitialEvents.onAdClickedEvent += onAdClickedEventInt;
         IronSourceInterstitialEvents.onAdClosedEvent += onAdClosedEventInt;
         IronSourceInterstitialEvents.onAdLoadFailedEvent += onAdLoadFailedEventInt;
-        IronSourceInterstitialEvents.onAdOpenedEvent += onAdReadyEventInt;
+        IronSourceInterstitialEvents.onAdOpenedEvent += onAdOpenedEventInt;
         IronSourceInterstitialEvents.onAdReadyEvent += onAdReadyEventInt;
         IronSourceInterstitialEvents.onAdShowFailedEvent += onAdShowFailedEventInt;
         IronSourceInterstitialEvents.onAdShowSucceededEvent += onAdShowSucceededEventInt;
-
-        // Other
-        IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitializationCompletedEvent;
-        IronSourceEvents.onImpressionDataReadyEvent += ImpressionDataReadyEvent;
     }
 
-
-    private void SetupButtons()
+    /// <summary>
+    /// Assigns behaviour to Unity UI components
+    /// </summary>
+    private void SetupUI()
     {
-        // REWARDED - Load
-        TempoCanvas.Instance.RewardedLoad.onClick.AddListener(() =>
+        // Rewarded Ads
+        _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
-            Debug.Log("unity-script: LoadRewardedButtonClicked");
             IronSource.Agent.loadRewardedVideo();
+            _tempoCanvas.StartFadingInterstitialLabel("Loading...");
         });
-
-        // REWARDED - Show
-        TempoCanvas.Instance.RewardedPlay.onClick.AddListener(() =>
+        _tempoCanvas.RewardedShow.onClick.AddListener(() =>
         {
             if (IronSource.Agent.isRewardedVideoAvailable())
             {
-                Debug.Log("unity-script: ShowRewardedButtonClicked");
                 IronSource.Agent.showRewardedVideo();
             }
             else
             {
-                Debug.Log("unity-script: IronSource.Agent.isRewardedVideoAvailable - False");
+                Debug.LogWarning("IronSource.Agent.isRewardedVideoAvailable: False");
             }
         });
 
-
-        // INTERSTITIAL - Load
-        TempoCanvas.Instance.InterstitialLoad.onClick.AddListener(() =>
+        // Interstitial Ads
+        _tempoCanvas.InterstitialLoad.onClick.AddListener(() =>
         {
-            Debug.Log("unity-script: LoadRewardedButtonClicked");
             IronSource.Agent.loadInterstitial();
+            _tempoCanvas.StartFadingRewardedLabel("Loading...");
         });
-
-        // INTERSTITIAL - Show
-        TempoCanvas.Instance.InterstitialPlay.onClick.AddListener(() =>
+        _tempoCanvas.InterstitialShow.onClick.AddListener(() =>
         {
             if (IronSource.Agent.isInterstitialReady())
             {
-                Debug.Log("unity-script: ShowInterstitialButtonClicked");
                 IronSource.Agent.showInterstitial();
             }
             else
             {
-                Debug.Log("unity-script: IronSource.Agent.isInterstitialVideoAvailable - False");
+                Debug.LogWarning("IronSource.Agent.isInterstitialVideoAvailable: False");
             }
         });
     }
 
+    /// <summary>
+    /// Returns key value dependent on current iOS/Android platform
+    /// </summary>
     private string GetAppKey()
     {
 #if UNITY_ANDROID
@@ -109,48 +101,69 @@ public class IronSourceDemoScript : MonoBehaviour
 #elif UNITY_IPHONE
         return _iosAppKey;
 #else
-        return "unexpected_platform";
+        return "";
 #endif
     }
 
+    /// <summary>
+    /// Make comment markers standout when console debugging
+    /// </summary>
     private void Shout(string msg)
     {
-        if (!string.IsNullOrWhiteSpace(msg))
+        if (_isDebugging && !string.IsNullOrWhiteSpace(msg))
         {
-            Debug.Log($"!! *** {msg} ***");
+            Debug.Log($"*** {msg} ***");
         }
     }
 
+
     // INTERSTITIAL
+    private void onAdReadyEventInt(IronSourceAdInfo obj)
+    {
+        Shout("onAdReadyEventInt");
+        _tempoCanvas.EnableInterstitialAd();
+    }
     private void onAdShowSucceededEventInt(IronSourceAdInfo obj)
     {
         Shout("onAdShowSucceededEventInt");
     }
+    private void onAdClosedEventInt(IronSourceAdInfo obj)
+    {
+        _tempoCanvas.CloseInterstitialAd();
+        Shout("onAdClosedEventInt");
+    }
+    // TODO: Currently not called from Tempo adapter
     private void onAdShowFailedEventInt(IronSourceError arg1, IronSourceAdInfo arg2)
     {
         Shout("onAdShowFailedEventInt");
     }
-    private void onAdReadyEventInt(IronSourceAdInfo obj)
-    {
-        Shout("onAdReadyEventInt");
-        TempoCanvas.Instance.EnableInterstitialAd();
-    }
     private void onAdLoadFailedEventInt(IronSourceError obj)
     {
-        TempoCanvas.Instance.FailedLoadInterstitialAd();
+        _tempoCanvas.FailedLoadInterstitialAd();
         Shout("onAdLoadFailedEventInt");
     }
     private void onAdClickedEventInt(IronSourceAdInfo obj)
     {
-        Shout("onAdClosedEventInt");
+        Shout("onAdClickedEventInt");
     }
-    private void onAdClosedEventInt(IronSourceAdInfo obj)
+    private void onAdOpenedEventInt(IronSourceAdInfo obj)
     {
-        TempoCanvas.Instance.CloseInterstitialAd();
-        Shout("onAdClosedEventInt");
+        Shout("onAdOpenedEventInt");
     }
 
+
     // REWARDED 
+    private void onAdReadyEventRew(IronSourceAdInfo obj)
+    {
+        _tempoCanvas.EnableRewardedAd();
+        Shout("onAdReadyEventRew");
+    }
+    private void onAdClosedEventRew(IronSourceAdInfo obj)
+    {
+        _tempoCanvas.CloseRewardedAd();
+        Shout("onAdClosedEventRew");
+    }
+    // TODO: Currently not called from Tempo adapter
     private void onAdUnavailableEventRew()
     {
         Shout("onAdUnavailableEventRew");
@@ -169,13 +182,8 @@ public class IronSourceDemoScript : MonoBehaviour
     }
     private void onAdLoadFailedEventRew(IronSourceError obj)
     {
-        TempoCanvas.Instance.FailedLoadRewardedAd();
+        _tempoCanvas.FailedLoadRewardedAd();
         Shout("onAdLoadFailedEventRew");
-    }
-    private void onAdClosedEventRew(IronSourceAdInfo obj)
-    {
-        TempoCanvas.Instance.CloseRewardedAd();
-        Shout("onAdClosedEventRew");
     }
     private void onAdClickedEventRew(IronSourcePlacement arg1, IronSourceAdInfo arg2)
     {
@@ -185,36 +193,6 @@ public class IronSourceDemoScript : MonoBehaviour
     {
         Shout("onAdAvailableEventRew");
     }
-    private void onAdReadyEventRew(IronSourceAdInfo obj)
-    {
-        TempoCanvas.Instance.EnableRewardedAd();
-        Shout("onAdReadyEventRew");
-    }
-
-
-
-    void OnApplicationPause(bool isPaused)
-    {
-        Debug.Log("unity-script: OnApplicationPause = " + isPaused);
-        IronSource.Agent.onApplicationPause(isPaused);
-    }
-
-    void SdkInitializationCompletedEvent()
-    {
-        Debug.Log("unity-script: I got SdkInitializationCompletedEvent");
-    }
-
-    void ImpressionSuccessEvent(IronSourceImpressionData impressionData)
-    {
-        Debug.Log("unity - script: I got ImpressionSuccessEvent ToString(): " + impressionData.ToString());
-        Debug.Log("unity - script: I got ImpressionSuccessEvent allData: " + impressionData.allData);
-    }
-
-    void ImpressionDataReadyEvent(IronSourceImpressionData impressionData)
-    {
-        Debug.Log("unity - script: I got ImpressionDataReadyEvent ToString(): " + impressionData.ToString());
-        Debug.Log("unity - script: I got ImpressionDataReadyEvent allData: " + impressionData.allData);
-    }
-
+   
 
 }

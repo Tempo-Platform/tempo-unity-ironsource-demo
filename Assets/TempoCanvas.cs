@@ -8,67 +8,72 @@ using System.Runtime.CompilerServices;
 public class TempoCanvas : MonoBehaviour
 {
     public Button RewardedLoad;
-    public Button RewardedPlay;
+    public Button RewardedShow;
     public TextMeshProUGUI RewardedMsg;
     public Button InterstitialLoad;
-    public Button InterstitialPlay;
+    public Button InterstitialShow;
     public TextMeshProUGUI InterstitialMsg;
-
-    public static TempoCanvas Instance;
 
     private Coroutine _rewardedLabelFade;
     private Coroutine _interstitialLabelFade;
 
     private float FADE_TIME = 3f;
 
-    private void Awake()
-    {
-        Instance = this;
-        InterstitialLoad.onClick.AddListener(LoadInterstitialAdDisplay);
-        RewardedLoad.onClick.AddListener(LoadRewardedAdDisplay);
-    }
-
-    private void LoadInterstitialAdDisplay()
-    {
-        StartFadingInterstitialLabel("Loading...");
-    }
+    /// <summary>
+    /// Enables 'Show' button for Interstitial ads, and clears output
+    /// </summary>
     public void EnableInterstitialAd()
     {
         InterstitialMsg.text = "";
-        InterstitialPlay.interactable = true;
+        InterstitialShow.interactable = true;
     }
+
+    /// <summary>
+    /// Disables 'Show' button for Interstitial ads, and clears output
+    /// </summary>
     public void CloseInterstitialAd()
     {
         InterstitialMsg.text = "";
-        InterstitialPlay.interactable = false;
+        InterstitialShow.interactable = false;
     }
+    /// <summary>
+    /// Disables 'Show' button for Interstitial ads, displays general error
+    /// </summary>
     public void FailedLoadInterstitialAd()
     {
-        InterstitialPlay.interactable = false;
+        InterstitialShow.interactable = false;
         StartFadingInterstitialLabel("Failed to load");
     }
 
-    private void LoadRewardedAdDisplay()
-    {
-        StartFadingRewardedLabel("Loading...");
-    }
+    /// <summary>
+    /// Enables 'Show' button for Rewarded ads, and clears output
+    /// </summary>
     public void EnableRewardedAd()
     {
         RewardedMsg.text = "";
-        RewardedPlay.interactable = true;
+        RewardedShow.interactable = true;
     }
+    /// <summary>
+    /// Disables 'Show' button for Rewarded ads, and clears output
+    /// </summary>
     public void CloseRewardedAd()
     {
         RewardedMsg.text = "";
-        RewardedPlay.interactable = false;
+        RewardedShow.interactable = false;
     }
+    /// <summary>
+    /// Disables 'Show' button for Rewarded ads, displays general error
+    /// </summary>
     public void FailedLoadRewardedAd()
     {
-        RewardedPlay.interactable = false;
+        RewardedShow.interactable = false;
         StartFadingRewardedLabel("Failed to load");
     }
 
-    private void StartFadingRewardedLabel(string msg)
+    /// <summary>
+    /// Triggers Rewarded output fade-away coroutine, and interupts any current one 
+    /// </summary>
+    public void StartFadingRewardedLabel(string msg)
     {
         RewardedMsg.text = msg;
         if(_rewardedLabelFade != null)
@@ -77,6 +82,10 @@ public class TempoCanvas : MonoBehaviour
         }
         _rewardedLabelFade = StartCoroutine(FadeRewarded());
     }
+
+    /// <summary>
+    /// Fades away the appearance of current Rewarded output over brief time and then removes value
+    /// </summary>
     private IEnumerator FadeRewarded()
     {
         float t = 0;
@@ -90,7 +99,10 @@ public class TempoCanvas : MonoBehaviour
         RewardedMsg.text = "";
         RewardedMsg.alpha = 1f;
     }
-    private void StartFadingInterstitialLabel(string msg)
+    /// <summary>
+    /// Triggers Interstitial output fade-away coroutine, and interupts any current one 
+    /// </summary>
+    public void StartFadingInterstitialLabel(string msg)
     {
         InterstitialMsg.text = msg;
         if (_interstitialLabelFade != null)
@@ -99,6 +111,9 @@ public class TempoCanvas : MonoBehaviour
         }
         _interstitialLabelFade = StartCoroutine(FadeInterstitial());
     }
+    /// <summary>
+    /// Fades away the appearance of current Interstitial output over brief time and then removes value
+    /// </summary>
     private IEnumerator FadeInterstitial()
     {
         float t = 0;
