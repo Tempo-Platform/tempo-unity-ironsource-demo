@@ -1,6 +1,6 @@
 <dependencies>
   <packages>
-    <package>com.github.tempo-platform:tempo-android-ironsource-mediation:1.0.0</package>
+    <package>com.github.tempo-platform:tempo-android-ironsource-mediation:1.0.3.3</package>
     <package>com.google.android.gms:play-services-ads-identifier:18.0.1</package>
     <package>com.google.android.gms:play-services-basement:18.1.0</package>
     <package>com.ironsource.sdk:mediationsdk:7.3.0.1</package>
@@ -73,11 +73,11 @@
     <file>Assets/Plugins/Android/com.android.volley.volley-1.2.1.aar</file>
     <file>Assets/Plugins/Android/com.github.stephenc.jcip.jcip-annotations-1.0-1.jar</file>
     <file>Assets/Plugins/Android/com.github.stripe.stripe-android.payments-core-v17.2.0.aar</file>
-    <file>Assets/Plugins/Android/com.github.tempo-platform.tempo-android-ironsource-mediation-1.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.github.tempo-platform.tempo-android-ironsource-mediation-1.0.3.3.aar</file>
     <file>Assets/Plugins/Android/com.github.Tempo-Platform.tempo-android-sdk-release-1.0.2.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-identifier-18.0.1.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-base-17.5.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.2.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-identity-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-maps-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-17.2.0.aar</file>
@@ -105,7 +105,7 @@
   </files>
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.tempoplatform.ironsourcetest.android" />
+    <setting name="bundleId" value="com.knotreel.aaa" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="False" />

@@ -7,16 +7,11 @@ using System;
 // Example for IronSource Unity.
 public class IronSourceDemoScript : MonoBehaviour
 {
+    [SerializeField] private string _androidAppKey = "1a46bef35"; // "1a46bef35"
+    [SerializeField] private string _iosAppKey = "1a4922385"; // "1a4922385"
+
     public void Start()
     {
-
-#if UNITY_ANDROID
-        string appKey = "1a46bef35";
-#elif UNITY_IPHONE
-        string appKey = "1a4922385";
-#else
-        string appKey = "unexpected_platform";
-#endif
 
         Debug.Log("unity-script: IronSource.Agent.validateIntegration");
         IronSource.Agent.validateIntegration();
@@ -27,11 +22,12 @@ public class IronSourceDemoScript : MonoBehaviour
 
         // SDK init
         Debug.Log("unity-script: IronSource.Agent.init");
-        IronSource.Agent.init(appKey);
+        IronSource.Agent.init(GetAppKey());
 
         SetupButtons();
     }
 
+   
     void OnEnable()
     {
         // Rewarded
@@ -106,8 +102,18 @@ public class IronSourceDemoScript : MonoBehaviour
         });
     }
 
+    private string GetAppKey()
+    {
+#if UNITY_ANDROID
+        return _androidAppKey;
+#elif UNITY_IPHONE
+        return _iosAppKey;
+#else
+        return "unexpected_platform";
+#endif
+    }
 
-    private void Oi(string msg)
+    private void Shout(string msg)
     {
         if (!string.IsNullOrWhiteSpace(msg))
         {
@@ -118,71 +124,72 @@ public class IronSourceDemoScript : MonoBehaviour
     // INTERSTITIAL
     private void onAdShowSucceededEventInt(IronSourceAdInfo obj)
     {
-        Oi("onAdShowSucceededEventInt");
+        Shout("onAdShowSucceededEventInt");
     }
     private void onAdShowFailedEventInt(IronSourceError arg1, IronSourceAdInfo arg2)
     {
-        Oi("onAdShowFailedEventInt");
+        Shout("onAdShowFailedEventInt");
     }
     private void onAdReadyEventInt(IronSourceAdInfo obj)
     {
-        Oi("onAdReadyEventInt");
+        Shout("onAdReadyEventInt");
         TempoCanvas.Instance.EnableInterstitialAd();
     }
     private void onAdLoadFailedEventInt(IronSourceError obj)
     {
-        Oi("onAdLoadFailedEventInt");
+        TempoCanvas.Instance.FailedLoadInterstitialAd();
+        Shout("onAdLoadFailedEventInt");
     }
     private void onAdClickedEventInt(IronSourceAdInfo obj)
     {
-        Oi("onAdClosedEventInt");
+        Shout("onAdClosedEventInt");
     }
     private void onAdClosedEventInt(IronSourceAdInfo obj)
     {
         TempoCanvas.Instance.CloseInterstitialAd();
-        Oi("onAdClosedEventInt");
+        Shout("onAdClosedEventInt");
     }
 
     // REWARDED 
     private void onAdUnavailableEventRew()
     {
-        Oi("onAdUnavailableEventRew");
+        Shout("onAdUnavailableEventRew");
     }
     private void onAdShowFailedEventRew(IronSourceError arg1, IronSourceAdInfo arg2)
     {
-        Oi("onAdShowFailedEventRew");
+        Shout("onAdShowFailedEventRew");
     }
     private void onAdRewardedEventRew(IronSourcePlacement arg1, IronSourceAdInfo arg2)
     {
-        Oi("onAdRewardedEventRew");
+        Shout("onAdRewardedEventRew");
     }
     private void onAdOpenedEventRew(IronSourceAdInfo obj)
     {
-        Oi("onAdReadyEventRew");
+        Shout("onAdReadyEventRew");
     }
     private void onAdLoadFailedEventRew(IronSourceError obj)
     {
-        Oi("onAdLoadFailedEventRew");
+        TempoCanvas.Instance.FailedLoadRewardedAd();
+        Shout("onAdLoadFailedEventRew");
     }
     private void onAdClosedEventRew(IronSourceAdInfo obj)
     {
         TempoCanvas.Instance.CloseRewardedAd();
-        Oi("onAdClosedEventRew");
+        Shout("onAdClosedEventRew");
     }
     private void onAdClickedEventRew(IronSourcePlacement arg1, IronSourceAdInfo arg2)
     {
-        Oi("onAdClickedEventRew");
+        Shout("onAdClickedEventRew");
     }
     private void onAdAvailableEventRew(IronSourceAdInfo obj)
     {
-        Oi("onAdAvailableEventRew");
+        Shout("onAdAvailableEventRew");
     }
     private void onAdReadyEventRew(IronSourceAdInfo obj)
     {
         TempoCanvas.Instance.EnableRewardedAd();
-        Oi("onAdReadyEventRew");
+        Shout("onAdReadyEventRew");
     }
-
 
 
 
@@ -192,13 +199,10 @@ public class IronSourceDemoScript : MonoBehaviour
         IronSource.Agent.onApplicationPause(isPaused);
     }
 
-
-
     void SdkInitializationCompletedEvent()
     {
         Debug.Log("unity-script: I got SdkInitializationCompletedEvent");
     }
-  
 
     void ImpressionSuccessEvent(IronSourceImpressionData impressionData)
     {
