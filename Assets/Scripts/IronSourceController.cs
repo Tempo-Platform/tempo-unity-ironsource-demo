@@ -58,7 +58,7 @@ public class IronSourceController : MonoBehaviour
         _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadRewardedVideo();
-            _tempoCanvas.StartFadingInterstitialLabel("Loading...");
+            _tempoCanvas.StartFadingRewardedLabel("Loading...");
         });
         _tempoCanvas.RewardedShow.onClick.AddListener(() =>
         {
@@ -76,7 +76,7 @@ public class IronSourceController : MonoBehaviour
         _tempoCanvas.InterstitialLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadInterstitial();
-            _tempoCanvas.StartFadingRewardedLabel("Loading...");
+            _tempoCanvas.StartFadingInterstitialLabel("Loading...");
         });
         _tempoCanvas.InterstitialShow.onClick.AddListener(() =>
         {
