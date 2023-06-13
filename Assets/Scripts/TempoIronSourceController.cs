@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-
-public class IronSourceController : MonoBehaviour
+public class TempoIronSourceController : MonoBehaviour
 {
     [Header("APP KEY from ironSource account")]
-    [SerializeField] private string _androidAppKey = "1a46bef35"; // "1a46bef35"
-    [SerializeField] private string _iosAppKey = "1a4922385"; // "1a4922385"
+    [SerializeField] private string _androidAppKey = "ANDROID_APP_KEY";
+    [SerializeField] private string _iosAppKey = "IOS_APP_KEY";
 
     [Header("Project settings")]
     [SerializeField] private TempoCanvas _tempoCanvas;
-    [SerializeField] private bool _isDebugging;
+    [SerializeField] private bool _isDebugging = true;
 
     public void Start()
     {
@@ -132,7 +131,23 @@ public class IronSourceController : MonoBehaviour
         _tempoCanvas.CloseInterstitialAd();
         Shout("onAdClosedEventInt");
     }
-    // TODO: Currently not called from Tempo adapter
+
+
+    // REWARDED 
+    private void onAdReadyEventRew(IronSourceAdInfo obj)
+    {
+        _tempoCanvas.EnableRewardedAd();
+        Shout("onAdReadyEventRew");
+    }
+    private void onAdClosedEventRew(IronSourceAdInfo obj)
+    {
+        _tempoCanvas.CloseRewardedAd();
+        Shout("onAdClosedEventRew");
+    }
+
+
+    #region TODO
+    // WIP: Currently not called from Tempo adapter (I)
     private void onAdShowFailedEventInt(IronSourceError arg1, IronSourceAdInfo arg2)
     {
         Shout("onAdShowFailedEventInt");
@@ -150,20 +165,7 @@ public class IronSourceController : MonoBehaviour
     {
         Shout("onAdOpenedEventInt");
     }
-
-
-    // REWARDED 
-    private void onAdReadyEventRew(IronSourceAdInfo obj)
-    {
-        _tempoCanvas.EnableRewardedAd();
-        Shout("onAdReadyEventRew");
-    }
-    private void onAdClosedEventRew(IronSourceAdInfo obj)
-    {
-        _tempoCanvas.CloseRewardedAd();
-        Shout("onAdClosedEventRew");
-    }
-    // TODO: Currently not called from Tempo adapter
+    // WIP: Currently not called from Tempo adapter (R)
     private void onAdUnavailableEventRew()
     {
         Shout("onAdUnavailableEventRew");
@@ -193,6 +195,5 @@ public class IronSourceController : MonoBehaviour
     {
         Shout("onAdAvailableEventRew");
     }
-   
-
+    #endregion
 }
