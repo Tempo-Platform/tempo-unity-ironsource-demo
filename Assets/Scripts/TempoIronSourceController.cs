@@ -6,7 +6,6 @@ using System;
 public class TempoIronSourceController : MonoBehaviour
 {
     [Header("APP KEY from ironSource account")]
-
     [SerializeField] private string _androidAppKey = "ANDROID_APP_KEY";
     [SerializeField] private string _iosAppKey = "IOS_APP_KEY";
 
@@ -14,13 +13,16 @@ public class TempoIronSourceController : MonoBehaviour
     [SerializeField] private TempoCanvas _tempoCanvas;
     [SerializeField] private bool _isDebugging = true;
 
+    private string _appKey;
+
     public void Start()
     {
         // Setup for manual control of reward ads
         IronSource.Agent.setManualLoadRewardedVideo(true);
 
         // Initialise the ironSource SDK
-        IronSource.Agent.init(GetAppKey());
+        _appKey = GetAppKey();
+        IronSource.Agent.init(_appKey);
 
         // Configures behaviour of UI elements in demo scene
         SetupUI();
@@ -58,7 +60,7 @@ public class TempoIronSourceController : MonoBehaviour
         _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadRewardedVideo();
-            _tempoCanvas.StartFadingRewardedLabel("Loading...");
+            _tempoCanvas.StartFadingRewardedLabel($"Loading... [{_appKey}]");
         });
         _tempoCanvas.RewardedShow.onClick.AddListener(() =>
         {
@@ -76,7 +78,7 @@ public class TempoIronSourceController : MonoBehaviour
         _tempoCanvas.InterstitialLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadInterstitial();
-            _tempoCanvas.StartFadingInterstitialLabel("Loading...");
+            _tempoCanvas.StartFadingInterstitialLabel($"Loading... [{_appKey}]");
         });
         _tempoCanvas.InterstitialShow.onClick.AddListener(() =>
         {
