@@ -505,7 +505,7 @@ MonoBehaviour:
   _androidAppKey: 1a46bef35
   _iosAppKey: 1a4922385
   _tempoCanvas: {fileID: 484534194}
-  _isDebugging: 1
+  _isDebugging: 0
 --- !u!4 &1402736980
 Transform:
   m_ObjectHideFlags: 0

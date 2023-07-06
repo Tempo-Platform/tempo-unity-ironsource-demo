@@ -1,10 +1,6 @@
 <dependencies>
 	<androidPackages>
-		<androidPackage spec="com.github.tempo-platform:tempo-android-ironsource-mediation:1.0.5">
-			<repositories>
-				<repository>https://jitpack.io</repository>
-			</repositories>
-		</androidPackage>
+		<androidPackage spec="io.github.tempo-platform:tempo-android-ironsource-adapter:1.0.5.1" />
 	</androidPackages>
 	<iosPods>
 		<iosPod name="tempo-ios-ironsource-mediation" version="~> 1.0.2">
