@@ -60,7 +60,7 @@ public class TempoIronSourceController : MonoBehaviour
         _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadRewardedVideo();
-            _tempoCanvas.StartFadingRewardedLabel($"Loading... [{_appKey}]");
+            _tempoCanvas.StartFadingRewardedLabel($"Loading... [REW:{_appKey}]");
         });
         _tempoCanvas.RewardedShow.onClick.AddListener(() =>
         {
@@ -78,7 +78,7 @@ public class TempoIronSourceController : MonoBehaviour
         _tempoCanvas.InterstitialLoad.onClick.AddListener(() =>
         {
             IronSource.Agent.loadInterstitial();
-            _tempoCanvas.StartFadingInterstitialLabel($"Loading... [{_appKey}]");
+            _tempoCanvas.StartFadingInterstitialLabel($"Loading... [INT:{_appKey}]");
         });
         _tempoCanvas.InterstitialShow.onClick.AddListener(() =>
         {
