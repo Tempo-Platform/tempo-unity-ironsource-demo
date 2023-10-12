@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _androidAppKey: 1a46bef35
-  _iosAppKey: 1ade2c39d
+  _iosAppKey: 1a470a75d
   _tempoCanvas: {fileID: 484534194}
   _isDebugging: 1
 --- !u!4 &1402736980
