@@ -17,6 +17,22 @@ public class TempoIronSourceController : MonoBehaviour
     [SerializeField] private TempoCanvas _tempoCanvas;
     [SerializeField] private bool _isDebugging = true;
 
+
+    public void CheckLocation()
+    {
+        // Check if location services are enabled
+        if (Input.location.isEnabledByUser)
+        {
+            // Request location updates
+            Input.location.Start();
+        }
+        else
+        {
+            Debug.LogWarning("Location services are not enabled. Please enable them in device settings.");
+        }
+    }
+
+
     public void Start()
     {
         // Setup for manual control of reward ads
@@ -100,7 +116,6 @@ public class TempoIronSourceController : MonoBehaviour
     private string GetAppKey()
     {
 #if UNITY_ANDROID
-        return _androidAppKey;
         if(_isProd)
         {
             return _androidAppKeyPROD;
