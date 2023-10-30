@@ -502,8 +502,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191f5798a75bd42589f98898505e981f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _androidAppKey: 1a46bef35
-  _iosAppKey: 1a470a75d
+  _androidAppKeyPROD: 1a46bef35
+  _androidAppKeyDEV: 1a6ad0b75
+  _iosAppKeyPROD: 1a4922385
+  _iosAppKeyDEV: 1a470a75d
+  _isProd: 0
   _tempoCanvas: {fileID: 484534194}
   _isDebugging: 1
 --- !u!4 &1402736980
