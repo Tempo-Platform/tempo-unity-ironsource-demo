@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4440221, g: 0.49316514, b: 0.5722316, a: 1}
+  m_IndirectSpecularColor: {r: 0.4439403, g: 0.4931519, b: 0.5722083, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -639,7 +639,7 @@ MonoBehaviour:
   _androidAppKeyDEV: 1a6ad0b75
   _iosAppKeyPROD: 1a4922385
   _iosAppKeyDEV: 1a470a75d
-  _isProd: 0
+  _isProd: 1
   _tempoCanvas: {fileID: 484534194}
   _isDebugging: 1
 --- !u!4 &1402736980
