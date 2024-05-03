@@ -7,12 +7,31 @@ public class TempoIronSourceController : MonoBehaviour
 {
     [Header("APP KEY from ironSource account")]
 
-    [SerializeField] private string _androidAppKey = "ANDROID_APP_KEY";
-    [SerializeField] private string _iosAppKey = "IOS_APP_KEY";
+    [SerializeField] private string _androidAppKeyPROD = "1a46bef35";
+    [SerializeField] private string _androidAppKeyDEV = "1a6ad0b75";
+    [SerializeField] private string _iosAppKeyPROD = "1a4922385";
+    [SerializeField] private string _iosAppKeyDEV = "1a470a75d";
+    [SerializeField] private bool _isProd = false;
 
     [Header("Project settings")]
     [SerializeField] private TempoCanvas _tempoCanvas;
     [SerializeField] private bool _isDebugging = true;
+
+
+    public void CheckLocation()
+    {
+        // Check if location services are enabled
+        if (Input.location.isEnabledByUser)
+        {
+            // Request location updates
+            Input.location.Start();
+        }
+        else
+        {
+            Debug.LogWarning("Location services are not enabled. Please enable them in device settings.");
+        }
+    }
+
 
     public void Start()
     {
@@ -97,9 +116,23 @@ public class TempoIronSourceController : MonoBehaviour
     private string GetAppKey()
     {
 #if UNITY_ANDROID
-        return _androidAppKey;
+        if(_isProd)
+        {
+            return _androidAppKeyPROD;
+        }
+        else
+        {
+            return _androidAppKeyDEV;
+        }
 #elif UNITY_IPHONE
-        return _iosAppKey;
+        if (_isProd)
+        {
+            return _iosAppKeyPROD;
+        }
+        else
+        {
+            return _iosAppKeyDEV;
+        }
 #else
         return "";
 #endif
