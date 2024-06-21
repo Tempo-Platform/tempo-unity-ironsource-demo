@@ -3,7 +3,7 @@
 		<androidPackage spec="io.github.tempo-platform:tempo-android-ironsource-adapter:1.6.0" />
 	</androidPackages>
 	<iosPods>
-		<iosPod name="tempo-ios-ironsource-mediation" version="1.7.0">
+		<iosPod name="tempo-ios-ironsource-mediation" version="1.7.2-rc.1">
 			<sources>
 				<source>https://github.com/CocoaPods/Specs</source>
 			</sources>
