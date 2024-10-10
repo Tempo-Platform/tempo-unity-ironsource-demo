@@ -35,6 +35,10 @@ public class TempoIronSourceController : MonoBehaviour
 
     public void Start()
     {
+        Debug.LogWarning("--------------------- Start ----------------------");
+
+        IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitializationCompletedEvent;
+
         // Setup for manual control of reward ads
         IronSource.Agent.setManualLoadRewardedVideo(true);
 
@@ -66,6 +70,9 @@ public class TempoIronSourceController : MonoBehaviour
         IronSourceInterstitialEvents.onAdReadyEvent += onAdReadyEventInt;
         IronSourceInterstitialEvents.onAdShowFailedEvent += onAdShowFailedEventInt;
         IronSourceInterstitialEvents.onAdShowSucceededEvent += onAdShowSucceededEventInt;
+
+       
+
     }
 
     /// <summary>
@@ -73,6 +80,7 @@ public class TempoIronSourceController : MonoBehaviour
     /// </summary>
     private void SetupUI()
     {
+        Debug.LogWarning("--------------------- SetupUI ----------------------");
         // Rewarded Ads
         _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
@@ -118,10 +126,12 @@ public class TempoIronSourceController : MonoBehaviour
 #if UNITY_ANDROID
         if(_isProd)
         {
+            Debug.LogWarning($"--------------------- returning: {_androidAppKeyPROD} ----------------------");
             return _androidAppKeyPROD;
         }
         else
         {
+            Debug.LogWarning($"--------------------- returning: {_androidAppKeyDEV} ----------------------");
             return _androidAppKeyDEV;
         }
 #elif UNITY_IPHONE
@@ -147,6 +157,12 @@ public class TempoIronSourceController : MonoBehaviour
         {
             Debug.Log($"*** {msg} ***");
         }
+    }
+
+    // INIT
+    private void SdkInitializationCompletedEvent()
+    {
+        Debug.LogWarning("--------------------- COMPLETED ----------------------");
     }
 
 
