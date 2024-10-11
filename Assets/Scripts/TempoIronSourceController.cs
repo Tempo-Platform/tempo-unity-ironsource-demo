@@ -7,10 +7,10 @@ public class TempoIronSourceController : MonoBehaviour
 {
     [Header("APP KEY from ironSource account")]
 
-    [SerializeField] private string _androidAppKeyPROD = "1a46bef35";
-    [SerializeField] private string _androidAppKeyDEV = "1a6ad0b75";
-    [SerializeField] private string _iosAppKeyPROD = "1a4922385";
-    [SerializeField] private string _iosAppKeyDEV = "1a470a75d";
+    [SerializeField] private string _androidAppKeyPROD = "1fd09e64d";
+    [SerializeField] private string _androidAppKeyDEV = "1fd09acc5";
+    [SerializeField] private string _iosAppKeyPROD = "1fd0acc6d";
+    [SerializeField] private string _iosAppKeyDEV = "1fd0a92e5";
     [SerializeField] private bool _isProd = false;
 
     [Header("Project settings")]
@@ -35,8 +35,6 @@ public class TempoIronSourceController : MonoBehaviour
 
     public void Start()
     {
-        Debug.LogWarning("--------------------- Start ----------------------");
-
         IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitializationCompletedEvent;
 
         // Setup for manual control of reward ads
@@ -80,7 +78,6 @@ public class TempoIronSourceController : MonoBehaviour
     /// </summary>
     private void SetupUI()
     {
-        Debug.LogWarning("--------------------- SetupUI ----------------------");
         // Rewarded Ads
         _tempoCanvas.RewardedLoad.onClick.AddListener(() =>
         {
@@ -126,12 +123,10 @@ public class TempoIronSourceController : MonoBehaviour
 #if UNITY_ANDROID
         if(_isProd)
         {
-            Debug.LogWarning($"--------------------- returning: {_androidAppKeyPROD} ----------------------");
             return _androidAppKeyPROD;
         }
         else
         {
-            Debug.LogWarning($"--------------------- returning: {_androidAppKeyDEV} ----------------------");
             return _androidAppKeyDEV;
         }
 #elif UNITY_IPHONE
@@ -162,7 +157,7 @@ public class TempoIronSourceController : MonoBehaviour
     // INIT
     private void SdkInitializationCompletedEvent()
     {
-        Debug.LogWarning("--------------------- COMPLETED ----------------------");
+        Shout("LevelPlay/ironSource initialisation complete");
     }
 
 
