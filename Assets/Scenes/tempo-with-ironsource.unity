@@ -646,7 +646,7 @@ MonoBehaviour:
   _androidAppKeyDEV: 1a6ad0b75
   _iosAppKeyPROD: 1a4922385
   _iosAppKeyDEV: 1a470a75d
-  _isProd: 0
+  _isProd: 1
   _tempoCanvas: {fileID: 484534194}
   _isDebugging: 1
 --- !u!4 &1402736980

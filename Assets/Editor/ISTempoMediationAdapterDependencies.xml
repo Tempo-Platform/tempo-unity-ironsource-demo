@@ -1,9 +1,9 @@
 <dependencies>
 	<androidPackages>
-		<androidPackage spec="io.github.tempo-platform:tempo-android-ironsource-adapter:1.6.2" />
+		<androidPackage spec="io.github.tempo-platform:tempo-android-ironsource-adapter:1.7.0-rc.0" />
 	</androidPackages>
 	<iosPods>
-		<iosPod name="tempo-ios-ironsource-mediation" version="1.7.1">
+		<iosPod name="tempo-ios-ironsource-mediation" version="1.9.0-rc.0">
 			<sources>
 				<source>https://github.com/CocoaPods/Specs</source>
 			</sources>
