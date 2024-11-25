@@ -9,13 +9,30 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using Unity.Services.LevelPlay;
+using Unity.Services.LevelPlay.Editor;
 
 namespace IronSource.Editor
 {
     public class IronSourceBuildPostprocessor
     {
+        private ILevelPlayLogger _logger;
+        private IronSourceBuildPostprocessor() : this(EditorServices.Instance.LevelPlayLogger)
+        {
+        }
+
+        internal IronSourceBuildPostprocessor(ILevelPlayLogger logger)
+        {
+            _logger = logger;
+        }
+
         [PostProcessBuild]
-        public static void OnPostprocessBuild(BuildTarget buildTarget, string buildPath)
+        public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
+        {
+            var postProcessor = new IronSourceBuildPostprocessor();
+            postProcessor.OnPostProcessBuildInternal(buildTarget, buildPath);
+        }
+
+        internal void OnPostProcessBuildInternal(BuildTarget buildTarget, string buildPath)
         {
             if (buildTarget == BuildTarget.iOS)
             {
@@ -44,12 +61,12 @@ namespace IronSource.Editor
                 }
             }
 
-            LevelPlayLogger.Log("IronSource build postprocessor finished");
+            _logger.Log("IronSource build postprocessor finished");
         }
 
-        private static void updateProject(BuildTarget buildTarget, string projectPath)
+        private void updateProject(BuildTarget buildTarget, string projectPath)
         {
-            LevelPlayLogger.Log("IronSource - Update project for IronSource");
+            _logger.Log("IronSource - Update project for IronSource");
 
             PBXProject project = new PBXProject();
             project.ReadFromString(File.ReadAllText(projectPath));
